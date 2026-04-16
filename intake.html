@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intake — Close the Gap</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF8F4;
+    --warm-white: #FFFFFF;
+    --charcoal: #1C1C1C;
+    --mid: #5A5A5A;
+    --light: #9A9A9A;
+    --accent: #2D6A4F;
+    --accent-light: #52B788;
+    --accent-pale: #D8F3DC;
+    --border: #E8E4DC;
+    --shadow: rgba(28,28,28,0.08);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--charcoal);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(250,248,244,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    animation: fadeDown 0.8s ease both;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--charcoal);
+    letter-spacing: -0.02em;
+  }
+
+  .nav-logo span {
+    color: var(--accent);
+  }
+
+  nav a {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--mid);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: var(--accent); }
+
+  .nav-cta {
+    background: var(--charcoal);
+    color: var(--cream) !important;
+    padding: 10px 22px;
+    border-radius: 100px;
+    transition: background 0.2s, transform 0.2s !important;
+  }
+
+  .nav-cta:hover {
+    background: var(--accent) !important;
+    transform: translateY(-1px);
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 36px;
+    align-items: center;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 50%, rgba(82,183,136,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(45,106,79,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    max-width: 780px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent-pale);
+    color: var(--accent);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 32px;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s infinite;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    color: var(--charcoal);
+    margin-bottom: 28px;
+    animation: fadeUp 0.8s 0.35s ease both;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 1.2rem;
+    color: var(--mid);
+    font-weight: 300;
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+    animation: fadeUp 0.8s 0.5s ease both;
+  }
+
+  .hero-sub strong {
+    color: var(--charcoal);
+    font-weight: 500;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.65s ease both;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    padding: 16px 32px;
+    border-radius: 100px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    box-shadow: 0 4px 20px rgba(45,106,79,0.25);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(45,106,79,0.35);
+    background: #255c43;
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--charcoal);
+    padding: 16px 32px;
+    border-radius: 100px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1.5px solid var(--border);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .hero-stat {
+    position: absolute;
+    right: 48px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: fadeLeft 0.8s 0.8s ease both;
+  }
+
+  .stat-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px 28px;
+    box-shadow: 0 4px 24px var(--shadow);
+    min-width: 200px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px var(--shadow);
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--light);
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  /* ── SECTION BASE ── */
+  section {
+    padding: 100px 48px;
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+    color: var(--charcoal);
+    margin-bottom: 20px;
+  }
+
+  h2 em { font-style: italic; color: var(--accent); }
+
+  /* ── TRUTH SECTION ── */
+  .truth {
+    background: var(--charcoal);
+    color: var(--cream);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .truth::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(82,183,136,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .truth-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .truth .section-label { color: var(--accent-light); }
+
+  .truth h2 { color: var(--cream); }
+
+  .truth-statement {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+    font-style: italic;
+    color: rgba(250,248,244,0.7);
+    line-height: 1.5;
+    margin: 32px auto 48px;
+    max-width: 680px;
+    border-left: 3px solid var(--accent-light);
+    padding-left: 28px;
+    text-align: left;
+  }
+
+  .truth-statement strong {
+    color: var(--cream);
+    font-style: normal;
+  }
+
+  .truth-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+    margin-top: 48px;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .truth-col {
+    background: rgba(255,255,255,0.04);
+    padding: 36px 28px;
+    text-align: left;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: background 0.3s;
+  }
+
+  .truth-col:hover { background: rgba(255,255,255,0.08); }
+
+  .truth-col-icon {
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+  }
+
+  .truth-col h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--cream);
+    margin-bottom: 10px;
+  }
+
+  .truth-col p {
+    font-size: 0.9rem;
+    color: rgba(250,248,244,0.55);
+    line-height: 1.6;
+  }
+
+  /* ── HOW IT WORKS ── */
+  .how {
+    background: var(--warm-white);
+  }
+
+  .how-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .how-header {
+    margin-bottom: 64px;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .step {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px 36px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .step:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px var(--shadow);
+  }
+
+  .step::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-light));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  .step:hover::after { transform: scaleX(1); }
+
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--accent-pale);
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+
+  .step h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--charcoal);
+    margin-bottom: 12px;
+  }
+
+  .step p {
+    font-size: 0.95rem;
+    color: var(--mid);
+    line-height: 1.65;
+  }
+
+  .step-tag {
+    display: inline-block;
+    background: var(--accent-pale);
+    color: var(--accent);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+
+  /* ── WHO IT'S FOR ── */
+  .who {
+    background: var(--cream);
+  }
+
+  .who-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .who-list {
+    list-style: none;
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .who-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    font-size: 1rem;
+    color: var(--mid);
+    line-height: 1.5;
+  }
+
+  .who-list li::before {
+    content: '→';
+    color: var(--accent);
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .who-visual {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 8px 40px var(--shadow);
+  }
+
+  .who-visual-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--light);
+    margin-bottom: 24px;
+  }
+
+  .gap-visual {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 32px;
+  }
+
+  .gap-node {
+    background: var(--accent-pale);
+    border: 2px solid var(--accent-light);
+    border-radius: 12px;
+    padding: 14px 18px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .gap-node-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .gap-line {
+    flex: 1;
+    height: 2px;
+    background: repeating-linear-gradient(90deg, var(--border) 0, var(--border) 6px, transparent 6px, transparent 12px);
+    position: relative;
+  }
+
+  .gap-hole {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fee;
+    border: 2px solid #f8b4b4;
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 0.65rem;
+    color: #c0392b;
+    font-weight: 500;
+    white-space: nowrap;
+    letter-spacing: 0.04em;
+  }
+
+  .gap-node-right {
+    background: var(--charcoal);
+    border-color: var(--charcoal);
+  }
+
+  .gap-node-right .gap-node-label { color: var(--cream); }
+
+  .who-visual-text {
+    font-size: 0.875rem;
+    color: var(--mid);
+    line-height: 1.6;
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+  }
+
+  .who-visual-text strong { color: var(--charcoal); }
+
+  /* ── OFFER ── */
+  .offer {
+    background: var(--warm-white);
+  }
+
+  .offer-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .offer-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 56px;
+  }
+
+  .offer-card {
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    padding: 40px 36px;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    position: relative;
+  }
+
+  .offer-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-light);
+    box-shadow: 0 12px 40px var(--shadow);
+  }
+
+  .offer-card.featured {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+
+  .offer-card.featured p { color: rgba(255,255,255,0.75); }
+  .offer-card.featured h3 { color: white; }
+  .offer-card.featured .offer-price { color: white; }
+  .offer-card.featured .offer-period { color: rgba(255,255,255,0.6); }
+
+  .offer-badge {
+    position: absolute;
+    top: -12px; right: 24px;
+    background: var(--charcoal);
+    color: var(--cream);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 100px;
+  }
+
+  .offer-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--charcoal);
+    margin-bottom: 8px;
+  }
+
+  .offer-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--charcoal);
+    margin: 20px 0 4px;
+  }
+
+  .offer-period {
+    font-size: 0.85rem;
+    color: var(--light);
+    margin-bottom: 24px;
+  }
+
+  .offer-card p {
+    font-size: 0.9rem;
+    color: var(--mid);
+    line-height: 1.65;
+  }
+
+  .offer-includes {
+    list-style: none;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .offer-includes li {
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .offer-includes li::before {
+    content: '✓';
+    width: 18px; height: 18px;
+    background: var(--accent-pale);
+    color: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .offer-card.featured .offer-includes li::before {
+    background: rgba(255,255,255,0.2);
+    color: white;
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: var(--cream);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(82,183,136,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-inner {
+    max-width: 620px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .cta-inner h2 { margin-bottom: 16px; }
+
+  .cta-inner p {
+    font-size: 1.1rem;
+    color: var(--mid);
+    margin-bottom: 40px;
+    line-height: 1.65;
+  }
+
+  .cta-form {
+    display: flex;
+    gap: 12px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .cta-form input {
+    flex: 1;
+    padding: 16px 20px;
+    border: 1.5px solid var(--border);
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--charcoal);
+    background: var(--warm-white);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .cta-form input:focus { border-color: var(--accent); }
+  .cta-form input::placeholder { color: var(--light); }
+
+  .cta-note {
+    font-size: 0.8rem;
+    color: var(--light);
+    margin-top: 16px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 40px 48px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--charcoal);
+  }
+
+  .footer-logo span { color: var(--accent); }
+
+  footer p {
+    font-size: 0.8rem;
+    color: var(--light);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeLeft {
+    from { opacity: 0; transform: translateX(40px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(-50%) translateY(0px); }
+    50% { transform: translateY(-50%) translateY(-10px); }
+  }
+
+  .hero-stat { animation: fadeLeft 0.8s 0.8s ease both, float 6s 1.6s ease-in-out infinite; }
+
+  /* scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    nav ul { gap: 20px; }
+    .hero { padding: 100px 24px 60px; flex-direction: column; }
+    .hero-stat { position: static; transform: none; flex-direction: row; flex-wrap: wrap; animation: fadeUp 0.8s 0.8s ease both; margin-top: 48px; }
+    section { padding: 72px 24px; }
+    .truth-cols { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
+    .who-inner { grid-template-columns: 1fr; gap: 40px; }
+    .offer-cards { grid-template-columns: 1fr; }
+    .cta-form { flex-direction: column; }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Intake<span>.</span></div>
+  <ul>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#offer">The offer</a></li>
+    <li><a href="#contact" class="nav-cta">Book a diagnostic</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Revenue Recovery for Small Business</div>
+    <h1>If you're losing in the gap between interest and <em>follow through.</em></h1>
+    <p class="hero-sub">
+      Most businesses aren't losing because of a lack of leads.<br>
+      They're losing <strong>after the lead arrives.</strong><br>
+      Intake finds that gap and closes it.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Book your diagnostic</a>
+      <a href="#how" class="btn-secondary">See how it works</a>
+    </div>
+  </div>
+  <div class="hero-stat">
+    <div class="stat-card">
+      <div class="stat-num">48h</div>
+      <div class="stat-label">From diagnostic to<br>your gap report</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">~4wk</div>
+      <div class="stat-label">From yes to a running<br>AI system in your business</div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUTH -->
+<section class="truth">
+  <div class="truth-inner">
+    <div class="section-label">The honest truth</div>
+    <h2>You don't have a lead problem.<br>You have a <em>leakage</em> problem.</h2>
+    <blockquote class="truth-statement">
+      "The first point where intent fails to become a tracked, nurtured, and converted opportunity — <strong>that's where your revenue is disappearing.</strong>"
+    </blockquote>
+    <div class="truth-cols">
+      <div class="truth-col reveal">
+        <div class="truth-col-icon">📞</div>
+        <h3>Someone shows interest</h3>
+        <p>They call, click, enquire, walk in, or fill out a form. Intent is real. The opportunity exists.</p>
+      </div>
+      <div class="truth-col reveal">
+        <div class="truth-col-icon">🕳️</div>
+        <h3>Then nothing catches them</h3>
+        <p>No follow up. No tracking. No nurture. They fall through the gap and the business never knows it happened.</p>
+      </div>
+      <div class="truth-col reveal">
+        <div class="truth-col-icon">💸</div>
+        <h3>Revenue walks out the door</h3>
+        <p>Not because the market is slow. Not because your product is wrong. Because the gap between hello and sold is wide open.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="how-inner">
+    <div class="how-header reveal">
+      <div class="section-label">How it works</div>
+      <h2>Three phases.<br>One clean outcome.</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <div class="step-tag">In person · Paid session</div>
+        <h3>The Diagnostic</h3>
+        <p>We sit with you, walk your operation, and find the exact point where intent is leaking. Within 48 hours you receive a single clear page — what's falling through, and what it's costing you in real numbers.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <div class="step-tag">Hybrid · 2–3 weeks</div>
+        <h3>The Build</h3>
+        <p>We design and install an AI system that catches every enquiry, tracks every lead, and nurtures every opportunity automatically. You don't manage it. It runs in the background while you run your business.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <div class="step-tag">In person · One session</div>
+        <h3>The Handover</h3>
+        <p>A simple thirty-minute walkthrough with you and your team. No tech overwhelm. Just clarity on what runs, what you'll see, and what changes from this point forward.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">04</div>
+        <div class="step-tag">Remote · Ongoing</div>
+        <h3>The Retainer</h3>
+        <p>We watch it. We optimise it. Every month you receive a plain-English summary of what the system caught, what converted, and what we're adjusting. Quarterly visits to find the next gap before you feel it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section class="who">
+  <div class="who-inner">
+    <div class="reveal">
+      <div class="section-label">Who this is for</div>
+      <h2>The business owner who knows they <em>can't do it alone.</em></h2>
+      <ul class="who-list">
+        <li>You're running a real operation with real customers and real overhead</li>
+        <li>You know leads are coming in — but you can't tell me how many right now</li>
+        <li>Follow up depends on someone remembering to do it</li>
+        <li>You've had people come back and say they tried to reach you</li>
+        <li>You want revenue to feel predictable, not like a monthly surprise</li>
+        <li>You're open to systems. You just need someone to build them.</li>
+      </ul>
+    </div>
+    <div class="who-visual reveal">
+      <div class="who-visual-label">Where the gap lives</div>
+      <div class="gap-visual">
+        <div class="gap-node">
+          <div class="gap-node-label">Intent</div>
+        </div>
+        <div class="gap-line">
+          <div class="gap-hole">gap ↓</div>
+        </div>
+        <div class="gap-node gap-node-right">
+          <div class="gap-node-label">Revenue</div>
+        </div>
+      </div>
+      <div class="who-visual-text">
+        Most businesses have <strong>intent arriving every day</strong> — calls, clicks, enquiries, walk-ins. The gap is everything that happens between that first touch and a transaction. <strong>Intake lives in that gap.</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFER -->
+<section class="offer" id="offer">
+  <div class="offer-inner">
+    <div class="reveal">
+      <div class="section-label">The offer</div>
+      <h2>Start with the diagnostic.<br><em>Everything else follows.</em></h2>
+    </div>
+    <div class="offer-cards">
+      <div class="offer-card reveal">
+        <h3>Revenue Leak Diagnostic</h3>
+        <div class="offer-price">$350</div>
+        <div class="offer-period">One-time · In person</div>
+        <p>A focused session where we find exactly where your revenue is leaking and what it's costing you. You leave with a clear one-page report and a decision to make.</p>
+        <ul class="offer-includes">
+          <li>In-person diagnostic session</li>
+          <li>One-page gap report within 48 hours</li>
+          <li>Real cost of leakage in your numbers</li>
+          <li>Clear next step recommendation</li>
+        </ul>
+      </div>
+      <div class="offer-card featured reveal">
+        <div class="offer-badge">Most popular</div>
+        <h3>Intake Retainer</h3>
+        <div class="offer-price">From $1,500</div>
+        <div class="offer-period">Per month · Following diagnostic</div>
+        <p>We build, install, and maintain the AI system that closes your gap permanently. Priced relative to what the diagnostic reveals you're losing.</p>
+        <ul class="offer-includes">
+          <li>Full AI system build and install</li>
+          <li>Automated lead capture and nurture</li>
+          <li>Monthly plain-English performance summary</li>
+          <li>Quarterly in-person review</li>
+          <li>Ongoing optimisation as you grow</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="cta-inner">
+    <div class="reveal">
+      <div class="section-label">Get started</div>
+      <h2>Find out what the gap<br>is <em>costing you.</em></h2>
+      <p>Leave your email and we'll reach out to schedule your diagnostic. No pitch. No pressure. Just a conversation about where the opportunity is.</p>
+      <div class="cta-form">
+        <input type="email" placeholder="Your email address">
+        <a href="#" class="btn-primary">Let's talk</a>
+      </div>
+      <p class="cta-note">We work with 3–5 businesses at a time. Spots are limited by design.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Intake<span>.</span></div>
+  <p>© 2026 Intake. Built for business owners who know they can't do it alone.</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Smooth nav highlight
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+  });
+
+  // Count up animation for stat numbers
+  function countUp(el, target, suffix = '', duration = 1200) {
+    let start = 0;
+    const step = target / (duration / 16);
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= target) { el.textContent = target + suffix; clearInterval(timer); }
+      else el.textContent = Math.floor(start) + suffix;
+    }, 16);
+  }
+
+  // Animate stat cards when in view
+  const statObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        statObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.stat-card').forEach(el => statObs.observe(el));
+</script>
+</body>
+</html>
